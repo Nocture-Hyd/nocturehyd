@@ -521,8 +521,16 @@ passModal.addEventListener('click',e=>{if(e.target===passModal)passModal.classLi
 
 document.getElementById('registerPassBtn').addEventListener('click',e=>{
   e.preventDefault();
+  e.stopPropagation();
   passModal.classList.remove('show');
-  location.hash='register';
+
+  // Open the registration page directly.
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  const registerPage=document.getElementById('register');
+  if(registerPage) registerPage.classList.add('show');
+
+  history.pushState(null,'','#register');
+  window.scrollTo({top:0,behavior:'smooth'});
 });
 
 // ---- registration form ----
